@@ -5,7 +5,8 @@ int bubbleSort(int ordenVector, int vector[]);
 int insertionSort(int ordenVector, int vector[]);
 int selectionSort(int ordenVector, int vector[]);
 int quickSort(int ordenVector, int vector[]);
-int mergeSort(int ordenVector, int vector[]);
+int merge(int A[], int p, int q, int r);
+int mergeSort(int A[], int p, int r);
 
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 
@@ -48,7 +49,7 @@ int main() {
       quickSort(ordenVector, vector);
       break;
     case 5:
-      mergeSort(ordenVector, vector);
+        mergeSort(vector, 0, ordenVector - 1);
       break;
     default:
       printf("Debe ingresar una opción valida.\n");
@@ -108,9 +109,52 @@ int quickSort(int ordenVector, int vector[]) {
   }
 }
 
-int mergeSort(int ordenVector, int vector[]) {
-  // TODO: Agregar el correspondiente metodo
-  return 0;
+int merge(int A[], int p, int q, int r) {
+
+    int n1, n2, i, j, k;
+
+    n1 = q - p + 1;
+    n2 = r - q;
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++) {
+        L[i] = A[p + i];
+    }
+
+    for (j = 0; j < n2; j++) {
+        R[j] = A[q + j + 1];
+    }
+    i = 0, j = 0;
+
+    for (k = p; i < n1 && j < n2; k++) {
+        if (L[i] < R[j]) {
+            A[k] = L[i++];
+        } else {
+            A[k] = R[j++];
+        }
+    }
+
+    while (i < n1) {
+        A[k++] = L[i++];
+    }
+
+    while (j < n2) {
+        A[k++] = R[j++];
+    }
+}
+
+int mergeSort(int A[], int p, int r) {
+    int nuevoVector[100];
+    int q;
+
+    clonarVector(r, A, nuevoVector);
+
+    if (p < r) {
+        q = (p + r) / 2;
+        mergeSort(A, p, q);
+        mergeSort(A, q + 1, r);
+        merge(A, p, q, r);
+    }
 }
 
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]) {
