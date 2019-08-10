@@ -2,111 +2,124 @@
 
 /* TODO: Mover metodos a la libreria */
 int bubbleSort(int ordenVector, int vector[]);
+
 int insertionSort(int ordenVector, int vector[]);
+
 int selectionSort(int ordenVector, int vector[]);
+
 int quickSort(int ordenVector, int vector[]);
+
 int merge(int A[], int p, int q, int r);
+
 int mergeSort(int A[], int p, int r);
 
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 
+void mostrarVector(int ordenVector, int vector[]);
+
 int main() {
-  int vector[100], ordenVector, metodoSeleccionado;
-  
-  /*esto es una prueba*/
+    int vector[100], ordenVector, metodoSeleccionado;
 
-  printf("Ingrese el orden del vector\n");
-  scanf("%d", &ordenVector);
+    printf("Ingrese el orden del vector\n");
+    scanf("%d", &ordenVector);
 
-  printf("Ingrese los valores del vector\n");
+    printf("Ingrese los valores del vector\n");
 
-  for(int i = 0; i < ordenVector; i++) {
-    scanf("%d", &vector[i]);
-  }
+    for (int i = 0; i < ordenVector; i++) {
+        scanf("%d", &vector[i]);
+    }
 
-  printf("===============================================================\n");
-  printf("Ingrese el numero que correponde con el metodo de ordenamiento\n");
-  printf("1. Intercambio o método burbuja mejorado.\n");
-  printf("2. Inserción o método de la baraja\n");
-  printf("3. Selección o método sencillo\n");
-  printf("4. Rápido o QuickSort\n");
-  printf("5. Por Mezcla o MergeSort\n");
-  printf("===============================================================\n");
-  
-  scanf("%d", &metodoSeleccionado);
+    printf("===============================================================\n");
+    printf("Ingrese el numero que correponde con el metodo de ordenamiento\n");
+    printf("1. Intercambio o método burbuja mejorado.\n");
+    printf("2. Inserción o método de la baraja\n");
+    printf("3. Selección o método sencillo\n");
+    printf("4. Rápido o QuickSort\n");
+    printf("5. Por Mezcla o MergeSort\n");
+    printf("===============================================================\n");
 
-  switch(metodoSeleccionado) {
-    case 1:
-      bubbleSort(ordenVector, vector);
-      break;
-    case 2:
-      insertionSort(ordenVector, vector);
-      break;
-    case 3:
-      selectionSort(ordenVector, vector);
-      break;
-    case 4:
-      quickSort(ordenVector, vector);
-      break;
-    case 5:
-        mergeSort(vector, 0, ordenVector - 1);
-      break;
-    default:
-      printf("Debe ingresar una opción valida.\n");
-  }
+    scanf("%d", &metodoSeleccionado);
 
-  return 0;
+    switch (metodoSeleccionado) {
+        case 1:
+            bubbleSort(ordenVector, vector);
+            break;
+        case 2:
+            insertionSort(ordenVector, vector);
+            break;
+        case 3:
+            selectionSort(ordenVector, vector);
+            break;
+        case 4:
+            quickSort(ordenVector, vector);
+            break;
+        case 5:
+            printf("Vector original: \n");
+
+            mostrarVector(ordenVector, vector);
+
+            mergeSort(vector, 0, ordenVector - 1);
+
+            printf("Vector ordenado con merge sort: \n");
+
+            mostrarVector(ordenVector, vector);
+            break;
+        default:
+            printf("Debe ingresar una opción valida.\n");
+    }
+
+    return 0;
 }
 
 int bubbleSort(int ordenVector, int vector[]) {
-  // TODO: Agregar el correspondiente metodo
-  return 0;
+    // TODO: Agregar el correspondiente metodo
+    return 0;
 }
 
 int insertionSort(int ordenVector, int vector[]) {
-  int nuevoVector[100]; 
-  clonarVector(ordenVector, vector, nuevoVector);
-  int i, a, index;
-  
-  for (i=1; i < ordenVector; i++){
-    index = nuevoVector[i];
-    a = i-1;
-    
-    while (a >= 0 && nuevoVector[a] > index) {
-      nuevoVector[a + 1] = nuevoVector[a];
-      a--;
+    int nuevoVector[100];
+    clonarVector(ordenVector, vector, nuevoVector);
+    int i, a, index;
+
+    for (i = 1; i < ordenVector; i++) {
+        index = nuevoVector[i];
+        a = i - 1;
+
+        while (a >= 0 && nuevoVector[a] > index) {
+            nuevoVector[a + 1] = nuevoVector[a];
+            a--;
+        }
+        nuevoVector[a + 1] = index;
+
     }
-    nuevoVector[a+1] = index;
-    
-  }
-  
-  	printf("ORIGINAL - [");
-	for(int i=0;i<ordenVector;i++){
-		printf("%d,",vector[i]);
-	}
-	printf("]\n");
-	
-	printf("NUEVO - [");
-	for(int i=0;i<ordenVector;i++){
-		printf("%d,",nuevoVector[i]);
-	}
-	printf("]\n");
+
+    printf("ORIGINAL - [");
+    for (int i = 0; i < ordenVector; i++) {
+        printf("%d,", vector[i]);
+    }
+    printf("]\n");
+
+    printf("NUEVO - [");
+    for (int i = 0; i < ordenVector; i++) {
+        printf("%d,", nuevoVector[i]);
+    }
+    printf("]\n");
 }
 
 int selectionSort(int ordenVector, int vector[]) {
-  // TODO: Agregar el correspondiente metodo
-  return 0;
+    // TODO: Agregar el correspondiente metodo
+    return 0;
 }
 
 int quickSort(int ordenVector, int vector[]) {
-  int nuevoVector[100]; 
-  clonarVector(ordenVector, vector, nuevoVector);
-  nuevoVector[2] = 2222;
+    int nuevoVector[100];
+    clonarVector(ordenVector, vector, nuevoVector);
+    nuevoVector[2] = 2222;
 
-  for(int i = 0; i < ordenVector; i++) {
-    printf("ORIGINAL - vector[%d]", vector[i]);
-    printf("NUEVO - nuevoVector[%d]\n", nuevoVector[i]);
-  }
+    for (int i = 0; i < ordenVector; i++) {
+        printf("ORIGINAL - vector[%d]", vector[i]);
+        printf("NUEVO - nuevoVector[%d]\n", nuevoVector[i]);
+    }
 }
 
 int merge(int A[], int p, int q, int r) {
@@ -158,7 +171,17 @@ int mergeSort(int A[], int p, int r) {
 }
 
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]) {
-  for(int i = 0; i < ordenVector; i++) {
-    nuevoVector[i] = vector[i];
-  }
+    for (int i = 0; i < ordenVector; i++) {
+        nuevoVector[i] = vector[i];
+    }
+}
+
+void mostrarVector(int ordenVector, int vector[]) {
+    printf("[\n");
+
+    for (int i = 0; i < ordenVector; i++) {
+        printf("    %d => %d,\n", i, vector[i]);
+    }
+
+    printf("]\n");
 }
