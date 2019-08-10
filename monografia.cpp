@@ -11,6 +11,8 @@ int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 
 int main() {
   int vector[100], ordenVector, metodoSeleccionado;
+  
+  /*esto es una prueba*/
 
   printf("Ingrese el orden del vector\n");
   scanf("%d", &ordenVector);
