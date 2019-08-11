@@ -121,8 +121,28 @@ int insertionSort(int ordenVector, int vector[]) {
 }
 
 int selectionSort(int ordenVector, int vector[]) {
-    // TODO: Agregar el correspondiente metodo
-    return 0;
+    int minimo = 0, i, j, temporal, nuevoVector[100];
+    clonarVector(ordenVector, vector, nuevoVector);
+
+    for (i = 0; i < ordenVector - 1; i++) {
+        minimo = i;
+        
+        for (j = i + 1; j < ordenVector; j++) {
+            if (nuevoVector[minimo] > nuevoVector[j]) {
+                minimo = j;
+            }
+        }
+
+        temporal = nuevoVector[minimo];
+        nuevoVector[minimo] = nuevoVector[i];
+        nuevoVector[i] = temporal;
+    }
+
+    printf("Vector original: \n");
+    mostrarVector(ordenVector, vector);
+
+    printf("Vector ordenado: \n");
+    mostrarVector(ordenVector, nuevoVector);
 }
 
 int quickSort(int ordenVector, int vector[]) {
