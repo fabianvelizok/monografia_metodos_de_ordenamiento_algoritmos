@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* TODO: Mover metodos a la libreria */
+// Metodos de ordenamiento
 int bubbleSort(int ordenVector, int vector[]);
 
 int insertionSort(int ordenVector, int vector[]);
@@ -9,9 +9,10 @@ int selectionSort(int ordenVector, int vector[]);
 
 int quickSort(int ordenVector, int vector[]);
 
-int merge(int A[], int p, int q, int r);
-
 int mergeSort(int A[], int p, int r);
+
+// Metodos adicionales
+int merge(int A[], int p, int q, int r);
 
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 
@@ -60,7 +61,7 @@ int main() {
 
             mergeSort(vector, 0, ordenVector - 1);
 
-            printf("Vector ordenado con merge sort: \n");
+            printf("Vector ordenado: \n");
 
             mostrarVector(ordenVector, vector);
             break;
@@ -72,8 +73,27 @@ int main() {
 }
 
 int bubbleSort(int ordenVector, int vector[]) {
-    // TODO: Agregar el correspondiente metodo
-    return 0;
+    int aux, b, nuevoVector[100];
+    clonarVector(ordenVector, vector, nuevoVector);
+
+    do {
+        b = 0;
+
+        for (int i = 0; i < ordenVector; i++) {
+            if (nuevoVector[i] > nuevoVector[i + 1]) {
+                aux = nuevoVector[i];
+                nuevoVector[i] = nuevoVector[i + 1];
+                nuevoVector[i + 1] = aux;
+                b = 1;
+            }
+        }
+    } while (b == 1);
+
+    printf("Vector original: \n");
+    mostrarVector(ordenVector, vector);
+
+    printf("Vector ordenado: \n");
+    mostrarVector(ordenVector, nuevoVector);
 }
 
 int insertionSort(int ordenVector, int vector[]) {
@@ -89,21 +109,15 @@ int insertionSort(int ordenVector, int vector[]) {
             nuevoVector[a + 1] = nuevoVector[a];
             a--;
         }
+
         nuevoVector[a + 1] = index;
-
     }
 
-    printf("ORIGINAL - [");
-    for (int i = 0; i < ordenVector; i++) {
-        printf("%d,", vector[i]);
-    }
-    printf("]\n");
+    printf("Vector original: \n");
+    mostrarVector(ordenVector, vector);
 
-    printf("NUEVO - [");
-    for (int i = 0; i < ordenVector; i++) {
-        printf("%d,", nuevoVector[i]);
-    }
-    printf("]\n");
+    printf("Vector ordenado: \n");
+    mostrarVector(ordenVector, nuevoVector);
 }
 
 int selectionSort(int ordenVector, int vector[]) {
