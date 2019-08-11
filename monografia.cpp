@@ -14,6 +14,10 @@ int mergeSort(int A[], int p, int r);
 // Metodos adicionales
 int merge(int A[], int p, int q, int r);
 
+void quick(int vector[], int menor, int mayor);
+
+int seleccionarPivote(int vector[], int menor, int mayor);
+
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 
 void mostrarVector(int ordenVector, int vector[]);
@@ -126,7 +130,7 @@ int selectionSort(int ordenVector, int vector[]) {
 
     for (i = 0; i < ordenVector - 1; i++) {
         minimo = i;
-        
+
         for (j = i + 1; j < ordenVector; j++) {
             if (nuevoVector[minimo] > nuevoVector[j]) {
                 minimo = j;
@@ -148,12 +152,14 @@ int selectionSort(int ordenVector, int vector[]) {
 int quickSort(int ordenVector, int vector[]) {
     int nuevoVector[100];
     clonarVector(ordenVector, vector, nuevoVector);
-    nuevoVector[2] = 2222;
 
-    for (int i = 0; i < ordenVector; i++) {
-        printf("ORIGINAL - vector[%d]", vector[i]);
-        printf("NUEVO - nuevoVector[%d]\n", nuevoVector[i]);
-    }
+    quick(nuevoVector, 0, ordenVector - 1);
+
+    printf("Vector original: \n");
+    mostrarVector(ordenVector, vector);
+
+    printf("Vector ordenado: \n");
+    mostrarVector(ordenVector, nuevoVector);
 }
 
 int merge(int A[], int p, int q, int r) {
@@ -201,6 +207,37 @@ int mergeSort(int A[], int p, int r) {
         mergeSort(A, p, q);
         mergeSort(A, q + 1, r);
         merge(A, p, q, r);
+    }
+}
+
+int seleccionarPivote(int vector[], int menor, int mayor) {
+    int i, pivote, valorPivote, temporal;
+    pivote = menor;
+    valorPivote = vector[pivote];
+
+    for (i = menor + 1; i <= mayor; i++) {
+        if (vector[i] < valorPivote) {
+            pivote++;
+            
+            temporal = vector[i];
+            vector[i] = vector[pivote];
+            vector[pivote] = temporal;
+        }
+    }
+
+    temporal = vector[menor];
+    vector[menor] = vector[pivote];
+    vector[pivote] = temporal;
+
+    return pivote;
+}
+
+void quick(int vector[], int menor, int mayor) {
+    if (menor < mayor) {
+        int pivote = seleccionarPivote(vector, menor, mayor);
+
+        quick(vector, menor, pivote - 1);
+        quick(vector, pivote + 1, mayor);
     }
 }
 
