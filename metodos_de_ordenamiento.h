@@ -10,10 +10,10 @@ int metodoRapido(int ordenVector, int vector[]);
 int metodoDeMezcla(int ordenVector, int vector[]);
 
 // Metodos adicionales
-int mergeSort(int A[], int p, int r);
-int merge(int A[], int p, int q, int r);
-void quick(int vector[], int menor, int mayor);
-int seleccionarPivote(int vector[], int menor, int mayor);
+int obtenerMezcla(int vector[], int p, int r);
+int ordenarMezcla(int vector[], int p, int q, int r);
+void ordernarParticiones(int vector[], int menor, int mayor);
+int obtenerPivote(int vector[], int menor, int mayor);
 int clonarVector(int ordenVector, int vector[], int nuevoVector[]);
 void mostrarVector(int ordenVector, int vector[]);
 
@@ -98,7 +98,7 @@ int metodoRapido(int ordenVector, int vector[]) {
     int nuevoVector[100];
     clonarVector(ordenVector, vector, nuevoVector);
 
-    quick(nuevoVector, 0, ordenVector - 1);
+    ordernarParticiones(nuevoVector, 0, ordenVector - 1);
 
     printf("Vector original: \n");
     mostrarVector(ordenVector, vector);
@@ -111,7 +111,7 @@ int metodoDeMezcla(int ordenVector, int vector[]) {
     int nuevoVector[100];
     clonarVector(ordenVector, vector, nuevoVector);
 
-    mergeSort(nuevoVector, 0, ordenVector - 1);
+    obtenerMezcla(nuevoVector, 0, ordenVector - 1);
 
     printf("Vector original: \n");
     mostrarVector(ordenVector, vector);
@@ -120,7 +120,7 @@ int metodoDeMezcla(int ordenVector, int vector[]) {
     mostrarVector(ordenVector, nuevoVector);
 }
 
-int merge(int A[], int p, int q, int r) {
+int ordenarMezcla(int vector[], int p, int q, int r) {
     int n1, n2, i, j, k;
 
     n1 = q - p + 1;
@@ -128,46 +128,43 @@ int merge(int A[], int p, int q, int r) {
     int L[n1], R[n2];
 
     for (i = 0; i < n1; i++) {
-        L[i] = A[p + i];
+        L[i] = vector[p + i];
     }
 
     for (j = 0; j < n2; j++) {
-        R[j] = A[q + j + 1];
+        R[j] = vector[q + j + 1];
     }
     i = 0, j = 0;
 
     for (k = p; i < n1 && j < n2; k++) {
         if (L[i] < R[j]) {
-            A[k] = L[i++];
+            vector[k] = L[i++];
         } else {
-            A[k] = R[j++];
+            vector[k] = R[j++];
         }
     }
 
     while (i < n1) {
-        A[k++] = L[i++];
+        vector[k++] = L[i++];
     }
 
     while (j < n2) {
-        A[k++] = R[j++];
+        vector[k++] = R[j++];
     }
 }
 
-int mergeSort(int A[], int p, int r) {
-    int nuevoVector[100];
+int obtenerMezcla(int vector[], int p, int r) {
     int q;
-
-    clonarVector(r, A, nuevoVector);
 
     if (p < r) {
         q = (p + r) / 2;
-        mergeSort(A, p, q);
-        mergeSort(A, q + 1, r);
-        merge(A, p, q, r);
+        obtenerMezcla(vector, p, q);
+        obtenerMezcla(vector, q + 1, r);
+        ordenarMezcla(vector, p, q, r);
     }
 }
 
-int seleccionarPivote(int vector[], int menor, int mayor) {
+int obtenerPivote(int vector[], int menor, int mayor) {
     int i, pivote, valorPivote, temporal;
     pivote = menor;
     valorPivote = vector[pivote];
@@ -189,12 +186,12 @@ int seleccionarPivote(int vector[], int menor, int mayor) {
     return pivote;
 }
 
-void quick(int vector[], int menor, int mayor) {
+void ordernarParticiones(int vector[], int menor, int mayor) {
     if (menor < mayor) {
-        int pivote = seleccionarPivote(vector, menor, mayor);
+        int pivote = obtenerPivote(vector, menor, mayor);
 
-        quick(vector, menor, pivote - 1);
-        quick(vector, pivote + 1, mayor);
+        ordernarParticiones(vector, menor, pivote - 1);
+        ordernarParticiones(vector, pivote + 1, mayor);
     }
 }
 
